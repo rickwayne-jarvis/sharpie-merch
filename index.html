@@ -35,10 +35,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.9
 
 /* FEATURED */
 .featured{padding:80px 24px;max-width:1200px;margin:0 auto}
-.featured-label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px}
-.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.featured-img{aspect-ratio:1;border-radius:4px;overflow:hidden;position:relative;background:#111}
-.featured-img img{width:100%;height:100%;object-fit:cover;display:block}
+.featured-label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:24px}
+.featured-img{border-radius:4px;overflow:hidden;position:relative;background:#111;margin-bottom:32px}
+.featured-img img{width:100%;height:auto;display:block}
+.featured-info{max-width:720px}
 .featured-info h2{font-size:2rem;font-weight:900;margin-bottom:8px}
 .featured-info .price{font-size:1.5rem;color:var(--red);font-weight:700;margin-bottom:8px}
 .featured-info .limited{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--kraft);margin-bottom:16px}
@@ -54,10 +54,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.9
 .products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .product-card{background:var(--card);border-radius:4px;overflow:hidden;transition:all 0.3s;cursor:pointer;position:relative}
 .product-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(227,24,55,0.1)}
-.product-img{aspect-ratio:1;background:#151515;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.product-img{background:#151515;position:relative;overflow:hidden}
+.product-img img{width:100%;height:auto;display:block;transition:transform 0.4s}
 .product-card:hover .product-img img{transform:scale(1.04)}
-.product-img .placeholder{font-size:2rem;color:#333}
 .badge{position:absolute;top:12px;right:12px;padding:4px 10px;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;border-radius:2px;z-index:2}
 .badge-limited{background:var(--red);color:var(--white)}
 .badge-sold{background:#333;color:var(--gray)}
@@ -103,7 +102,6 @@ footer .credit{font-size:0.65rem;color:#444;letter-spacing:0.1em;margin-top:16px
 @media(max-width:768px){
   .nav-links{display:none}
   .products{grid-template-columns:repeat(2,1fr);gap:12px}
-  .featured-grid{grid-template-columns:1fr}
   .hero h1{font-size:3.5rem}
   .sub-features{flex-direction:column;align-items:center}
 }
@@ -142,17 +140,15 @@ footer .credit{font-size:0.65rem;color:#444;letter-spacing:0.1em;margin-top:16px
 
 <section class="featured" id="drops">
   <div class="featured-label">Featured Drop</div>
-  <div class="featured-grid">
-    <div class="featured-img">
-      <img src="merch-images/merch-01-roty-jacket.png" alt="ROTY Jacket">
-    </div>
-    <div class="featured-info">
-      <h2>ROTY JACKET</h2>
-      <div class="price">$195</div>
-      <div class="limited">Limited Edition / 500 Units / ROTY Line</div>
-      <p>The jacket NFL rookies fought over. NASCAR pit crew aesthetic meets streetwear. Bold Sharpie graphics, oversized lettering, full-coverage branding. Every jacket is a walking billboard you WANT to wear. The proof that cultural commerce works. Now available to everyone.</p>
-      <button class="btn-add">Add to Cart</button>
-    </div>
+  <div class="featured-img">
+    <img src="merch-images/merch-01-roty-jacket.png" alt="ROTY Jacket">
+  </div>
+  <div class="featured-info">
+    <h2>ROTY JACKET</h2>
+    <div class="price">$195</div>
+    <div class="limited">Limited Edition / 500 Units / ROTY Line</div>
+    <p>The jacket NFL rookies fought over. NASCAR pit crew aesthetic meets streetwear. Bold Sharpie graphics, oversized lettering, full-coverage branding. Every jacket is a walking billboard you WANT to wear. The proof that cultural commerce works. Now available to everyone.</p>
+    <button class="btn-add">Add to Cart</button>
   </div>
 </section>
 
