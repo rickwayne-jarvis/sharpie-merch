@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAKE IT — Sharpie Cultural Commerce</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0A0A0A;--card:#111;--red:#E31837;--kraft:#C4956A;--white:#fff;--gray:#888;--dim:#333}
+body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;line-height:1.5}
+a{color:var(--white);text-decoration:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-weight:900;font-size:1.1rem;letter-spacing:0.15em}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:24px;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray)}
+.nav-links a:hover{color:var(--white)}
+.nav-cart{position:relative;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray)}
+.nav-cart .count{position:absolute;top:-8px;right:-12px;background:var(--red);color:var(--white);font-size:0.6rem;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,rgba(227,24,55,0.08) 0%,transparent 60%);pointer-events:none}
+.hero h1{font-size:clamp(4rem,12vw,8rem);font-weight:900;letter-spacing:0.2em;line-height:0.9}
+.hero .tagline{font-size:0.85rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--kraft);margin-top:16px}
+.hero .family{font-size:0.75rem;letter-spacing:0.15em;color:var(--gray);margin-top:24px;line-height:2}
+.hero .cta{margin-top:40px;display:inline-block;padding:14px 48px;border:2px solid var(--red);color:var(--white);font-weight:700;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s}
+.hero .cta:hover{background:var(--red);color:var(--white)}
+
+/* DROP BANNER */
+.drop-banner{background:var(--red);padding:12px 24px;text-align:center;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700}
+.drop-banner .timer{font-family:monospace;font-size:0.9rem;margin-left:8px}
+
+/* FEATURED */
+.featured{padding:80px 24px;max-width:1200px;margin:0 auto}
+.featured-label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px}
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.featured-img{aspect-ratio:1;border-radius:4px;overflow:hidden;position:relative;background:#111}
+.featured-img img{width:100%;height:100%;object-fit:cover;display:block}
+.featured-info h2{font-size:2rem;font-weight:900;margin-bottom:8px}
+.featured-info .price{font-size:1.5rem;color:var(--red);font-weight:700;margin-bottom:8px}
+.featured-info .limited{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--kraft);margin-bottom:16px}
+.featured-info p{color:var(--gray);font-size:0.9rem;margin-bottom:24px;line-height:1.7}
+.btn-add{display:inline-block;padding:14px 40px;background:var(--red);color:var(--white);font-weight:700;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s}
+.btn-add:hover{background:#ff2244;transform:translateY(-2px)}
+
+/* SECTION */
+.section{padding:80px 24px;max-width:1200px;margin:0 auto}
+.section-title{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:32px;padding-bottom:12px;border-bottom:1px solid #1a1a1a}
+
+/* PRODUCT GRID */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.product-card{background:var(--card);border-radius:4px;overflow:hidden;transition:all 0.3s;cursor:pointer;position:relative}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(227,24,55,0.1)}
+.product-img{aspect-ratio:1;background:#151515;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.product-card:hover .product-img img{transform:scale(1.04)}
+.product-img .placeholder{font-size:2rem;color:#333}
+.badge{position:absolute;top:12px;right:12px;padding:4px 10px;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;border-radius:2px;z-index:2}
+.badge-limited{background:var(--red);color:var(--white)}
+.badge-sold{background:#333;color:var(--gray)}
+.badge-new{background:var(--kraft);color:var(--bg)}
+.product-info{padding:16px}
+.product-cat{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.product-name{font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.product-price{color:var(--kraft);font-weight:600;font-size:0.9rem}
+.product-card.sold-out .product-img{opacity:0.5}
+.product-card.sold-out .product-name{color:var(--gray)}
+
+/* SUBSCRIPTION */
+.sub-section{padding:80px 24px;background:linear-gradient(180deg,var(--bg) 0%,#0f0f0f 100%)}
+.sub-inner{max-width:800px;margin:0 auto;text-align:center}
+.sub-inner h2{font-size:2.5rem;font-weight:900;margin-bottom:8px}
+.sub-price{font-size:1.5rem;color:var(--red);font-weight:700;margin-bottom:16px}
+.sub-desc{color:var(--gray);font-size:0.95rem;margin-bottom:32px;line-height:1.7}
+.sub-features{display:flex;gap:32px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
+.sub-feature{text-align:center;flex:1;min-width:180px}
+.sub-feature .icon{font-size:1.5rem;margin-bottom:8px;color:var(--red)}
+.sub-feature h4{font-size:0.8rem;letter-spacing:0.1em;margin-bottom:4px}
+.sub-feature p{font-size:0.75rem;color:var(--gray)}
+.btn-sub{display:inline-block;padding:16px 56px;border:2px solid var(--red);background:transparent;color:var(--white);font-weight:700;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.btn-sub:hover{background:var(--red)}
+
+/* STORY */
+.story{padding:80px 24px;max-width:700px;margin:0 auto;text-align:center}
+.story h2{font-size:1.8rem;font-weight:900;margin-bottom:16px}
+.story p{color:var(--gray);line-height:1.8;margin-bottom:16px}
+.story .highlight{color:var(--kraft);font-weight:600}
+
+/* FOOTER */
+footer{padding:60px 24px;border-top:1px solid #1a1a1a;text-align:center}
+footer .lockup{font-size:1.1rem;font-weight:700;letter-spacing:0.1em;margin-bottom:24px}
+footer .lockup span{color:var(--red)}
+.newsletter{display:flex;gap:0;max-width:400px;margin:0 auto 24px}
+.newsletter input{flex:1;padding:12px 16px;background:#111;border:1px solid #333;color:var(--white);font-size:0.85rem;outline:none}
+.newsletter input::placeholder{color:#555}
+.newsletter button{padding:12px 24px;background:var(--red);border:none;color:var(--white);font-weight:700;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer}
+footer .credit{font-size:0.65rem;color:#444;letter-spacing:0.1em;margin-top:16px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .products{grid-template-columns:repeat(2,1fr);gap:12px}
+  .featured-grid{grid-template-columns:1fr}
+  .hero h1{font-size:3.5rem}
+  .sub-features{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  .products{grid-template-columns:1fr 1fr;gap:8px}
+  .product-info{padding:10px}
+  .product-name{font-size:0.8rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MAKE <span>IT</span></div>
+  <div class="nav-links">
+    <a href="#drops">Drops</a>
+    <a href="#shop">Shop</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="#story">Story</a>
+  </div>
+  <div class="nav-cart">CART <span class="count">0</span></div>
+</nav>
+
+<section class="hero">
+  <h1>MAKE IT</h1>
+  <div class="tagline">Cultural Commerce by Sharpie</div>
+  <div class="family">
+    Can't Be Erased. Show Up Loud. Write Myself In. Cut the Noise.
+  </div>
+  <a href="#shop" class="cta">Shop Now</a>
+</section>
+
+<div class="drop-banner">
+  NEXT DROP: ROTY COLLECTION — <span class="timer" id="timer">00:00:00:00</span>
+</div>
+
+<section class="featured" id="drops">
+  <div class="featured-label">Featured Drop</div>
+  <div class="featured-grid">
+    <div class="featured-img">
+      <img src="merch-images/merch-01-roty-jacket.png" alt="ROTY Jacket">
+    </div>
+    <div class="featured-info">
+      <h2>ROTY JACKET</h2>
+      <div class="price">$195</div>
+      <div class="limited">Limited Edition / 500 Units / ROTY Line</div>
+      <p>The jacket NFL rookies fought over. NASCAR pit crew aesthetic meets streetwear. Bold Sharpie graphics, oversized lettering, full-coverage branding. Every jacket is a walking billboard you WANT to wear. The proof that cultural commerce works. Now available to everyone.</p>
+      <button class="btn-add">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-title">All Products</div>
+  <div class="products">
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="badge badge-limited">LIMITED</span>
+        <img src="merch-images/merch-01-roty-jacket.png" alt="ROTY Jacket">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">ROTY Line</div>
+        <div class="product-name">ROTY Jacket</div>
+        <div class="product-price">$195</div>
+      </div>
+    </div>
+
+    <div class="product-card sold-out">
+      <div class="product-img">
+        <span class="badge badge-sold">SOLD OUT</span>
+        <img src="merch-images/merch-02-box-logo-set.png" alt="Box Logo Marker Set">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Supreme Drop</div>
+        <div class="product-name">Box Logo Marker Set</div>
+        <div class="product-price">$148</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="badge badge-new">NEW</span>
+        <img src="merch-images/merch-03-draft-mode-hoodie.png" alt="Draft Mode Hoodie">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Supreme Drop</div>
+        <div class="product-name">Draft Mode Hoodie</div>
+        <div class="product-price">$145</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="badge badge-limited">LIMITED</span>
+        <img src="merch-images/merch-04-everything-else-tote.png" alt="EVERYTHING ELSE Tote">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Supreme Drop</div>
+        <div class="product-name">The Mark Jacket</div>
+        <div class="product-price">$195</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-05-pit-crew-hoodie.png" alt="Pit Crew Hoodie">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">ROTY Line</div>
+        <div class="product-name">Pit Crew Hoodie</div>
+        <div class="product-price">$125</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="badge badge-new">NEW</span>
+        <img src="merch-images/merch-04-everything-else-tote.png" alt="EVERYTHING ELSE Tote">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Cultural</div>
+        <div class="product-name">EVERYTHING ELSE Tote</div>
+        <div class="product-price">$45</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-06-draft-mode-kit.png" alt="Draft Mode Marker Kit">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Cultural</div>
+        <div class="product-name">Draft Mode Marker Kit</div>
+        <div class="product-price">$34.99</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-07-sneaker-kit.png" alt="Sneaker Customization Kit">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Cultural</div>
+        <div class="product-name">Sneaker Customization Kit</div>
+        <div class="product-price">$49.99</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-08-journal-set.png" alt="MAKE IT Journal + S-Gel">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Essentials</div>
+        <div class="product-name">MAKE IT Journal + S-Gel</div>
+        <div class="product-price">$24.99</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="badge badge-limited">LIMITED</span>
+        <img src="merch-images/merch-03-draft-mode-hoodie.png" alt="Dare Wall Print">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Cultural</div>
+        <div class="product-name">Dare Wall Print</div>
+        <div class="product-price">$75</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-05-pit-crew-hoodie.png" alt="Draft Day Snapback">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">ROTY Line</div>
+        <div class="product-name">Draft Day Snapback</div>
+        <div class="product-price">$48</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="merch-images/merch-02-box-logo-set.png" alt="Permanent Collection Deck">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Supreme Drop</div>
+        <div class="product-name">Permanent Collection Deck</div>
+        <div class="product-price">$98</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="sub-section" id="subscribe">
+  <div class="sub-inner">
+    <h2>THE MAKE IT BOX</h2>
+    <div class="sub-price">$29.99 / month</div>
+    <div class="sub-desc">Exclusive markers. Monthly prompts. Blank surfaces. Limited merch you can't get anywhere else. Every box is a dare to make something permanent.</div>
+    <div class="sub-features">
+      <div class="sub-feature">
+        <div class="icon">&#9679;</div>
+        <h4>Exclusive Colorways</h4>
+        <p>Marker colors only subscribers get</p>
+      </div>
+      <div class="sub-feature">
+        <div class="icon">&#9679;</div>
+        <h4>First Access to Drops</h4>
+        <p>24-hour early access to every limited release</p>
+      </div>
+      <div class="sub-feature">
+        <div class="icon">&#9679;</div>
+        <h4>Draft Mode Unlocks</h4>
+        <p>Exclusive game content and achievements</p>
+      </div>
+    </div>
+    <button class="btn-sub">Subscribe Now</button>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <h2>The Campaign That Pays for Itself</h2>
+  <p>MAKE IT Cultural Commerce is not merch. It is the economic engine behind the most awarded campaign Sharpie has ever produced. Every product sold funds the creative. Every creative drives the culture. Every culture sells the product.</p>
+  <p class="highlight">Can't Be Erased. Show Up Loud. Write Myself In. Cut the Noise.</p>
+  <p>Four attitudes. One brand. A cultural commerce platform that turns a marker company into a cultural force.</p>
+</section>
+
+<footer>
+  <div class="lockup">Make It Bold. Make It Last. Make It <span>Sharpie.</span></div>
+  <div class="newsletter">
+    <input type="email" placeholder="Enter your email for drop alerts">
+    <button>JOIN</button>
+  </div>
+  <div class="credit">A Brand Imagination Group Production</div>
+</footer>
+
+<script>
+// Drop countdown timer
+function updateTimer(){
+  const now=new Date();
+  const drop=new Date(now.getFullYear(),now.getMonth(),now.getDate()+7,12,0,0);
+  if(now>drop)drop.setDate(drop.getDate()+7);
+  const diff=drop-now;
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('timer').textContent=
+    String(d).padStart(2,'0')+':'+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+setInterval(updateTimer,1000);
+updateTimer();
+
+// Add to cart feedback
+document.querySelectorAll('.btn-add').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.textContent='ADDED';
+    btn.style.background='#333';
+    const count=document.querySelector('.nav-cart .count');
+    count.textContent=parseInt(count.textContent)+1;
+    setTimeout(()=>{btn.textContent='ADD TO CART';btn.style.background=''},2000);
+  });
+});
+</script>
+</body>
+</html>
